@@ -1,0 +1,21 @@
+[submodule "deps/neural_robot"]
+	path = deps/neural_robot
+	url = git@github.com:nmarticorena/neural_robot.git
+[submodule "deps/iSDF"]
+	path = deps/iSDF
+	url = git@github.com:nmarticorena/iSDF.git
+[submodule "deps/robotics-toolbox-python"]
+	path = deps/robotics-toolbox-python
+	url = git@github.com:nmarticorena/robotics-toolbox-python.git
+[submodule "deps/swift"]
+	path = deps/swift
+	url = git@github.com:nmarticorena/swift.git
+[submodule "deps/spatialgeometry"]
+	path = deps/spatialgeometry
+	url = git@github.com:nmarticorena/spatialgeometry.git
+[submodule "deps/spatialmath-python"]
+	path = deps/spatialmath-python
+	url = git@github.com:nmarticorena/spatialmath-python.git
+[submodule "deps/phd_tools"]
+	path = deps/phd_tools
+	url = git@github.com:nmarticorena/phd_tools.git
