@@ -19,3 +19,6 @@
 [submodule "deps/phd_tools"]
 	path = deps/phd_tools
 	url = git@github.com:nmarticorena/phd_tools.git
+[submodule "deps/react-swift"]
+	path = deps/react-swift
+	url = git@github.com:nmarticorena/react-swift
