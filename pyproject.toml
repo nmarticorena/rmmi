@@ -1,0 +1,13 @@
+[project]
+name = "mm_neo"
+version = "0.1.0"  # You can specify a version here
+description = "Reactive Mobile Manipulation using an Implicit Neural Map"
+dependencies = [
+    "psutil",
+    "tyro",
+    "qpsolvers[quadprog]"
+]  # Add dependencies if there are any
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

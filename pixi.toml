@@ -1,0 +1,50 @@
+[workspace]
+authors = ["nmarticorena <nicolas.marticorena.vidal@gmail.com>"]
+channels = ["conda-forge"]
+name = "rmmi"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[system-requirements]
+cuda = "12.0"
+
+[tasks]
+
+[dependencies]
+python = "3.11.*"
+pytorch-gpu = "*"
+cuda-version = "12.8.*"
+seaborn = ">=0.13.2,<0.14"
+tqdm = ">=4.67.1,<5"
+trimesh = ">=4.7.4,<5"
+imageio = ">=2.37.0,<3"
+urdfpy = ">=0.0.22,<0.0.23"
+numpy= ">2"
+scikit-image = ">=0.25.2,<0.26"
+opencv = ">=4.12.0,<5"
+torchvision = ">=0.22.0,<0.23"
+imgviz = ">=1.7.5,<2"
+pdbpp = ">=0.11.7,<0.12"
+quadprog = ">=0.1.13,<0.2"
+openpyxl = ">=3.1.5,<4"
+pip = ">=25.2,<26"
+hatchling = ">=1.27.0,<2"
+
+[pypi-options]
+no-build-isolation = ["neural_robot", "roboticstoolbox-python", "swift-sim", "spatialgeometry", "incsdf", "spatialmath-python"]
+
+
+[pypi-dependencies]
+mm_neo = {path = ".", editable = true}
+neural_robot = {path = "./deps/neural_robot/", editable = true}
+nerf_tools = {path = "./deps/phd_tools/", editable = true}
+roboticstoolbox-python = {path = "./deps/robotics-toolbox-python/", editable = true}
+swift-sim = {path = "./deps/swift/", editable = true}
+spatialgeometry = {path = "./deps/spatialgeometry/", editable = true}
+isdf = {path = "./deps/iSDF/", editable = true}
+spatialmath-python = {path = "./deps/spatialmath-python/", editable = true}
+open3d = ">=0.18.0, <0.19"
+tensorboard-plugin-profile = ">=2.20.6, <3"
+tensorboard = "*"
+qpsolvers = {extras =["open-source-solvers","qpswift"]}
+
