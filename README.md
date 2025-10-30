@@ -32,9 +32,11 @@ pixi install # Install all the dependencies in a local project
 ## Citation
 If you're using RMMI in your research, please cite.
 
+```bib
 @article{Marticorena2025RMMI,
   author    = {Marticorena, Nicolas and Fischer, Tobias and Haviland, Jesse and Suenderhauf, Niko},
   booktitle = {IEEE/RSJ International Conference on Intelligent Robots and Systems},
   title     = {{RMMI: Reactive Mobile Manipulation using an Implicit Neural Map}},
   year      = {2025},
 }
+```
