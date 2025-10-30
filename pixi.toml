@@ -29,6 +29,11 @@ quadprog = ">=0.1.13,<0.2"
 openpyxl = ">=3.1.5,<4"
 pip = ">=25.2,<26"
 hatchling = ">=1.27.0,<2"
+hatch = ">=1.14.1,<2"
+hatch-cpp = ">=0.1.8,<0.2"
+compilers = ">=1.11.0,<2"
+scikit-build-core = ">=0.11.6,<0.12"
+cmake = ">=4.1.2,<5"
 
 [pypi-options]
 no-build-isolation = ["neural_robot", "roboticstoolbox-python", "swift-sim", "spatialgeometry", "incsdf", "spatialmath-python"]
