@@ -8,8 +8,6 @@ version = "0.1.0"
 [system-requirements]
 cuda = "12.0"
 
-[tasks]
-
 [dependencies]
 python = "3.11.*"
 pytorch-gpu = "*"
@@ -42,7 +40,7 @@ no-build-isolation = ["neural_robot", "roboticstoolbox-python", "swift-sim", "sp
 [pypi-dependencies]
 mm_neo = {path = ".", editable = true}
 neural_robot = {path = "./deps/neural_robot/", editable = true}
-nerf_tools = {path = "./deps/phd_tools/", editable = true}
+nerf_tools = {path = "./deps/nerf_tools/", editable = true}
 roboticstoolbox-python = {path = "./deps/robotics-toolbox-python/", editable = true}
 swift-sim = {path = "./deps/swift/", editable = true}
 spatialgeometry = {path = "./deps/spatialgeometry/", editable = true}

@@ -520,8 +520,8 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/46/00/71b90ed48e895667ecfb1eaab27c1523ee2fa217433ed77a73b13205ca4b/yarl-1.22.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
       - pypi: ./
       - pypi: ./deps/iSDF
+      - pypi: ./deps/nerf_tools
       - pypi: ./deps/neural_robot
-      - pypi: ./deps/phd_tools
       - pypi: ./deps/robotics-toolbox-python
       - pypi: ./deps/spatialgeometry
       - pypi: ./deps/spatialmath-python
@@ -4950,7 +4950,7 @@ packages:
   purls: []
   size: 891641
   timestamp: 1738195959188
-- pypi: ./deps/phd_tools
+- pypi: ./deps/nerf_tools
   name: nerf-tools
   version: 0.1.0
   sha256: 57c752f79cfc686dc6967c62865a136caa35ea51a5fe09d98a9f1519fb6f0220
@@ -6684,7 +6684,7 @@ packages:
 - pypi: ./deps/swift
   name: swift-sim
   version: 2.0.0
-  sha256: 50b8859cc4a58c4d54b6991b1b5b2defc8d61b6c119ecf3555d1e15be3c8bcf8
+  sha256: 48303e80fb0d79fe85a2f7333d829ab6b813121cebac8bb73016e50a4829a76e
   requires_dist:
   - numpy>=2.0
   - spatialgeometry>=1.0.0
