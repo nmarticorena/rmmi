@@ -19,7 +19,7 @@ imageio = ">=2.37.0,<3"
 urdfpy = ">=0.0.22,<0.0.23"
 numpy= ">2"
 scikit-image = ">=0.25.2,<0.26"
-opencv = ">=4.12.0,<5"
+# opencv = ">=4.12.0,<5"
 torchvision = ">=0.22.0,<0.23"
 imgviz = ">=1.7.5,<2"
 pdbpp = ">=0.11.7,<0.12"
@@ -32,6 +32,9 @@ hatch-cpp = ">=0.1.8,<0.2"
 compilers = ">=1.11.0,<2"
 scikit-build-core = ">=0.11.6,<0.12"
 cmake = ">=4.1.2,<5"
+einops = ">=0.8.2,<0.9"
+wandb = ">=0.28.0,<0.29"
+opencv = ">=4.12.0,<5"
 
 [pypi-options]
 no-build-isolation = ["neural_robot", "roboticstoolbox-python", "swift-sim", "spatialgeometry", "incsdf", "spatialmath-python"]
@@ -44,7 +47,7 @@ nerf_tools = {path = "./deps/nerf_tools/", editable = true}
 roboticstoolbox-python = {path = "./deps/robotics-toolbox-python/", editable = true}
 swift-sim = {path = "./deps/swift/", editable = true}
 spatialgeometry = {path = "./deps/spatialgeometry/", editable = true}
-isdf = {path = "./deps/iSDF/", editable = true}
+incsdf = {path = "./deps/iSDF/", editable = true}
 spatialmath-python = {path = "./deps/spatialmath-python/", editable = true}
 open3d = ">=0.18.0, <0.19"
 tensorboard-plugin-profile = ">=2.20.6, <3"
