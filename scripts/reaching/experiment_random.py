@@ -10,6 +10,7 @@ from mm_neo.ideal_sdf import RandomizedSDF, RandomizedSDFMultiple
 import os
 from mm_neo.configs.controllers import NeoConfig
 from mm_neo.logger import Logger
+from mm_neo.sdf import load_isdf
 from mm_neo.mm_controllers import MMNeoSDF
 
 from neural_robot.unity_frankie import NeuralFrankie
@@ -20,6 +21,11 @@ from neural_robot.utils.points_utils import get_min_distance
 
 np.random.seed(125)  # set equal seed for the different poses
 torch.manual_seed(125)
+
+
+# Translator dict
+names = {"table_new": "table_new_v2",
+         "bookshelf_cage": "bookshelf_cage_v2"}
 
 
 @dataclass
@@ -43,15 +49,15 @@ dt = 0.05
 
 
 config = args.config
-config.acceleration_gain = 10000000
-config.vel_scaler = 1
+# config.acceleration_gain = 10000000
+# config.vel_scaler = 1
 env = swift.Swift()
 env.launch(realtime=args.realtime, headless=args.headless, browser="firefox")
 # if args.env_name == "table_new":
 #     env.set_camera_pose([1.75, 0.5, 1.25], [1, 0, 0.5])
 # elif args.env_name == "bookshelf_cage":
 #     print("here")
-env.set_camera_pose([-0.1, 0.5, 1.75], [5.0, 0.0, 0.15])
+# env.set_camera_pose([-0.1, 0.5, 1.75], [5.0, 0.0, 0.15])
 
 
 if args.spheres:
@@ -74,11 +80,11 @@ if not args.headless:
     robot.replace_point_meshes()
 env.add(robot)
 
-sampled = os.listdir(f"data/{args.env_name}")
-sampled = [s for s in sampled if "table" in s]
+# sampled = os.listdir(f"data/{args.env_name}")
+# sampled = [s for s in sampled if "table" in s]
 
-if len(sampled) > args.n_experiments:
-    sampled = sampled[: args.n_experiments]
+# if len(sampled) > args.n_experiments:
+    # sampled = sampled[: args.n_experiments]
 
 if args.multiple_poses:
     problem = RandomizedSDFMultiple(
@@ -96,19 +102,24 @@ logger = Logger(args.exp_name, config)
 reached = False
 
 # objective = problem.target
-for i in tqdm(sampled, leave=False):
-    problem.load(f"data/{args.env_name}/{i}")
+for i in tqdm(range(args.n_experiments), leave=False):
+    filename = f"data/{args.env_name}/{args.env_name}_{i:04d}.json"
+    problem.load(filename)
     col = "" if config.collisions else "_no_col"
     if config.collision_cost == "":
         col += "_no_active_col"
     approx = "approx" if config.approx_jacobian else "exact"
-    file_name = i.split(".")[0]
+    file_name = filename.split(".")[0]
 
     folder = f"{args.exp_name}/{args.env_name}/"  # template of folder
     folder += f"{col}_{config.collision_cost}_{approx}/"  # Config
     folder += f"{robot_type}_{robot_sampled}_{file_name}"  # robot
+    isdf_folder =f"{names[args.env_name]}/{names[args.env_name]}_{i:04d}"
 
-    controller = MMNeoSDF(robot, problem.sdf, config, logger=logger, gt_robot=gt_robot)
+    
+    sdf = load_isdf(isdf_folder)
+
+    controller = MMNeoSDF(robot,sdf, config, logger=logger, gt_robot=gt_robot, gt_obstacles=problem.get_obstacles())
     logger.initialize(folder, config)
     robot.base = problem.base
     robot.q = robot.qr
@@ -148,6 +159,7 @@ for i in tqdm(sampled, leave=False):
             gt_robot.q[: robot.base_dofs] = 0
         if not reached:
             break
+    print(f"experiment number {i} got reached : {reached}")
     reached = False
     logger.save(type(robot).__name__)
 
