@@ -2,6 +2,7 @@ import numpy as np
 import traceback
 import spatialmath as sm
 import torch
+import wandb
 from tqdm import tqdm
 
 # import time
@@ -30,7 +31,7 @@ names = {"table_new": "table_new_v2",
 
 @dataclass
 class Config:
-    n_experiments: int = 1000
+    n_experiments: int = 500 
     env_name: str = "random_table"
     exp_name: str = "test_random/"
     config: NeoConfig = field(default_factory = lambda: NeoConfig())
@@ -43,21 +44,19 @@ class Config:
 
 args = tyro.cli(Config)
 
+wandb_exp_name = args.exp_name
+wandb.init(project="controller_run", name=wandb_exp_name)
+
 args.exp_name = f"random_reaching/{args.exp_name}"
 
 dt = 0.05
 
 
 config = args.config
-# config.acceleration_gain = 10000000
-# config.vel_scaler = 1
+
 env = swift.Swift()
 env.launch(realtime=args.realtime, headless=args.headless, browser="firefox")
-# if args.env_name == "table_new":
-#     env.set_camera_pose([1.75, 0.5, 1.25], [1, 0, 0.5])
-# elif args.env_name == "bookshelf_cage":
-#     print("here")
-# env.set_camera_pose([-0.1, 0.5, 1.75], [5.0, 0.0, 0.15])
+
 
 
 if args.spheres:
@@ -100,6 +99,7 @@ robot_type = type(robot).__name__
 
 logger = Logger(args.exp_name, config)
 reached = False
+n_reached = 0
 
 # objective = problem.target
 for i in tqdm(range(args.n_experiments), leave=False):
@@ -159,10 +159,13 @@ for i in tqdm(range(args.n_experiments), leave=False):
             gt_robot.q[: robot.base_dofs] = 0
         if not reached:
             break
-    print(f"experiment number {i} got reached : {reached}")
+    print(f"experiment number {i} got reached : {reached} in {j}steps")
+    n_reached += int(reached)
+    wandb.log({"SR_running_avg": n_reached / (i + 1)}, step=i)
     reached = False
     logger.save(type(robot).__name__)
 
 env.step()
+wandb.finish()
 
 # time.sleep(1)
