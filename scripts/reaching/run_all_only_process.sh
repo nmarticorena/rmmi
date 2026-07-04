@@ -21,7 +21,8 @@ for r in ${sampled[@]}; do
   active_col=(w_avg)
   for e in ${envs[@]}; do
     for a in ${active_col[@]}; do
-      python $file --exp-name "$folder_r" --env-name "$e" --config.collision-cost "$a"   --config.no-approx-jacobian  --robot $r &
+      #python $file --exp-name "$folder_r" --env-name "$e" --config.collision-cost "$a"   --config.no-approx-jacobian  --robot $r &
+      echo "Skipping"
     done
   done
   wait
@@ -35,7 +36,8 @@ for r in ${robots[@]}; do
   folder_r="$folder/$r"
   for e in ${envs[@]}; do
     for a in ${active_col[@]}; do
-      python $file --exp-name "$folder_r" --env-name "$e" --config.collision-cost "$a"   --config.no-approx-jacobian --"$r" &
+      #python $file --exp-name "$folder_r" --env-name "$e" --config.collision-cost "$a"   --config.no-approx-jacobian --"$r" &
+      echo "Skipping"
     done
   done
   wait
