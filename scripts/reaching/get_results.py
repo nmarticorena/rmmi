@@ -6,21 +6,18 @@ import numpy as np
 from neural_robot.neural_frankie import NeuralFrankie
 from dataclasses import dataclass, field
 import tyro
-import sys
-from typing import List
 
 
 @dataclass
 class Config:
-    envs: List = field(
-        default_factory=lambda: [
+    envs: tuple[str,...] =( 
             "bookshelf",
             "bookshelf_2",
             "table_free",
             "table",
             "table_cyl_small",
-        ]
     )
+    
     exp_name: str = "test_random/"
 
 
